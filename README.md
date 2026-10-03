@@ -1,70 +1,199 @@
-# Getting Started with Create React App
+# SIGNAL — Evidence-Driven Engineering Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SIGNAL modernizes a 2023 React portfolio template into a recruiter-oriented engineering portfolio system.
 
-## Available Scripts
+The original repository presented a generic "Jhon Doe" profile, Lorem Ipsum copy, a fake BUY NOW button, social-media icon buttons without destinations, seven navigation anchors for sections that mostly did not exist, decorative skills imagery, a typewriter dependency, and a scroll listener registered directly during render. It also used Create React App, React Router, React Bootstrap, multiple icon libraries, Web Vitals, a large Google Fonts import, and CRA boilerplate despite being a single-page portfolio.
 
-In the project directory, you can run:
+## Engineering focus
 
-### `npm start`
+SIGNAL treats a portfolio as structured, verifiable evidence:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- repository-backed case studies
+- explicit scope boundaries
+- capability taxonomy
+- search across project evidence
+- URL-backed capability and search state
+- deterministic filtering
+- recruiter-friendly scanning
+- semantic controls
+- accessible focus treatment
+- reduced-motion support
+- small dependency surface
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Architecture
 
-### `npm test`
+```text
+src/data/portfolio.js
+        │
+        ▼
+src/lib/portfolioState.js
+        ├─ query normalization
+        ├─ capability validation
+        ├─ case-study filtering
+        ├─ URL read/write rules
+        ├─ capability counts
+        ├─ case-study lookup
+        └─ evidence-link validation
+        │
+        ▼
+src/App.jsx
+        ├─ discovery state
+        ├─ history.replaceState()
+        ├─ case-study rendering
+        └─ capability presentation
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Portfolio claims live in structured data instead of being scattered through presentational components.
 
-### `npm run build`
+## Evidence policy
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Each featured case study:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. links to a real repository
+2. describes observable repository-level evidence
+3. states a scope boundary
+4. avoids invented customer names, traffic, revenue, testimonials, or deployment scale
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This portfolio deliberately prefers traceability over marketing language.
 
-### `npm run eject`
+## Featured repositories
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Current case studies point to:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `agentic-automation-lab`
+- `interactive-parts-finder-platform`
+- `restaurant-ai-operations-platform`
+- `applied-agentic-systems`
+- `REACT_ECommers_Product_Lists`
+- `REACT_Navbar`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The portfolio can be extended by adding structured entries to `src/data/portfolio.js`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Discovery state
 
-## Learn More
+The URL can carry:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `q` — search text
+- `capability` — selected capability
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Example:
 
-### Code Splitting
+```text
+?q=state&capability=frontend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Unknown capabilities recover to `all`, and unrelated query parameters are preserved.
 
-### Analyzing the Bundle Size
+## Modernization summary
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Create React App → Vite
+- React 18 → React 19
+- removed React Router
+- removed React Bootstrap
+- removed React Bootstrap Icons
+- removed React Icons
+- removed react-simple-typewriter
+- removed Web Vitals
+- removed decorative/person/skill images
+- removed fake BUY NOW behavior
+- removed destination-less social buttons
+- removed placeholder Jhon Doe / Lorem Ipsum content
+- removed non-existent navigation sections
+- removed render-time scroll listener
+- removed CRA public/test boilerplate
+- removed legacy lockfile
+- removed oversized Google Fonts import
+- added Vitest, CI, GitHub Pages deployment, and professional documentation
 
-### Making a Progressive Web App
+## Accessibility
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- skip navigation
+- semantic navigation and headings
+- real search field
+- real filter/reset buttons
+- `aria-pressed` capability state
+- visible focus treatment
+- responsive layout
+- reduced-motion support
+- descriptive external repository links
 
-### Advanced Configuration
+## Local development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Requirements:
 
-### Deployment
+- Node.js 22+
+- npm
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+npm install --legacy-peer-deps --no-audit --no-fund
+npm run dev
+```
 
-### `npm run build` fails to minify
+## Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm test
+```
+
+The suite covers:
+
+- search normalization
+- valid and invalid capability normalization
+- capability filtering
+- title/summary search
+- evidence-text search
+- combined search + capability filtering
+- empty discovery state
+- URL state reading
+- invalid URL recovery
+- canonical URL writing
+- unrelated-query preservation
+- default-state cleanup
+- capability counting
+- case-study lookup
+- missing case-study recovery
+- HTTP evidence-link validation
+- rejection of unsafe/non-HTTP evidence links
+
+## Quality gate
+
+```bash
+npm run check
+```
+
+Runs syntax checks, Vitest, and a Vite production build.
+
+## CI
+
+`.github/workflows/quality.yml` runs on pull requests and pushes to `main`.
+
+## Deployment
+
+SIGNAL includes a manual GitHub Pages workflow.
+
+1. Open **Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Open **Actions → Deploy Pages**.
+4. Run the workflow.
+
+## Security review
+
+No API keys, tokens, passwords, credentials, auth flows, backend endpoints, analytics, sensitive browser storage, or user-controlled HTML injection are required.
+
+External evidence links are explicit HTTP(S) repository URLs stored in static portfolio data.
+
+## Scope
+
+SIGNAL is a static engineering portfolio. It intentionally does not implement:
+
+- CMS editing
+- contact-form submission
+- analytics
+- authentication
+- fake testimonials
+- fake customer logos
+- invented conversion metrics
+
+## License
+
+MIT. See [LICENSE](./LICENSE).
