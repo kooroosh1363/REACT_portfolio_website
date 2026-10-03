@@ -48,7 +48,7 @@ describe("SIGNAL portfolio state", () => {
         query: "state",
         capability: "frontend"
       }).map((item) => item.id)
-    ).toEqual(["meridian", "beacon"]);
+    ).toEqual(["interactive-parts-finder", "meridian", "beacon"]);
   });
 
   it("returns all items when discovery state is empty", () => {
